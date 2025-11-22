@@ -87,11 +87,18 @@ def boneFormater(bone_name, cubes, pivot = [0,0,0], parent = None):
 def toBBJson(all_rects, grps, file_name): 
     """Convert vortice-based rects to json format used in BlockBench Bedrock model. 
     Each grps[i] is used to name the bone of all_rects[i]
-    Asserts len(all_rects) == len(grps)
+    If grps is shorter than all_rects, automatically create default group names
     Note all groups are default to pivot at [0,0,0], have position at [0,0,0] and rotation of [0,0,0].
     Can accept appendix already in BB format to append at the end of all bones. Usually used to append specific bone infomations."""
-    # ppl('remember to vhange tobbj back',1)
-    assert len(all_rects) == len(grps)
+    # 确保grps列表长度与all_rects匹配
+    if len(grps) < len(all_rects):
+        print(f"Warning: grps list length ({len(grps)}) is less than all_rects length ({len(all_rects)}). Creating default group names.")
+        # 为缺少的组创建默认名称
+        default_grps = [f"bone_{i}" for i in range(len(all_rects) - len(grps))]
+        grps = grps + default_grps
+    elif len(grps) > len(all_rects):
+        print(f"Warning: grps list length ({len(grps)}) exceeds all_rects length ({len(all_rects)}). Truncating grps list.")
+        grps = grps[:len(all_rects)]
     bbjson = {}
     stuff = []
     for i in range(len(all_rects)): 
@@ -139,6 +146,11 @@ def toBBJsonUV(all_rects, grps, file_name, uvInfo):
 #     # TODO
 
 def writeToJson(file_name, content): # ck
-    path = save_path+'/'+file_name+'.json'
-    with open(path, 'w') as f: 
+    import os
+    # 确保save_path目录存在
+    if not os.path.exists(save_path):
+        os.makedirs(save_path)
+    # 使用os.path.join正确处理路径
+    path = os.path.join(save_path, file_name + '.json')
+    with open(path, 'w', encoding='utf-8') as f: 
         json.dump(content, f, indent=4, ensure_ascii=False)
