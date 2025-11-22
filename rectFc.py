@@ -51,3 +51,4 @@ def toRects(trigs, trigCt=0, trigStart=0):
     print('该体转换为长方面花费了',dt,'秒')
     print('Convert this body to rects took',dt,'s.\n')
     return np.array(allRects)
+    
