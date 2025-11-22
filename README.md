@@ -75,3 +75,7 @@ I reserve my rights to hold those pirating the code, with no author label or unc
 
 * 安啦写这么多只是用来防止*某些人*。只要你不是蓄意盗用，我不会找你麻烦的 :)
 * Please don't be scared of the terms. It's just in case of *some people*. You'll be fine as long as you aren't pirating my code :)
+
+* 注：这个用于blcokbench obj转json的所以我把所有的ture全改成了false
+* 注：blockbench 的 obj 必须用blender 处理
+* 优化了导入路径
