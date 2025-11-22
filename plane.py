@@ -79,3 +79,4 @@ class plane: # Known problem: getting plane with e1==e2 or e1==e2==0 will result
     
     def __hash__(self) -> int:
         return self.hashHelper(self.start,256) + self.hashHelper(self.e1,16) + self.hashHelper(self.e2,8) + self.hashHelper(self.norm,1)
+
