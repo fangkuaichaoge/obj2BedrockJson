@@ -34,7 +34,7 @@ def load_obj(obj_path): # ck
     with open(obj_path, "r") as obj_file: 
         vertices = []
         for line in obj_file: 
-            if line.startswith('g '): 
+            if line.startswith('g ') or line.startswith('s ') or line.startswith('mg ') or line.startswith('o '): 
                 # Body -> Group
                 if len(faces) > 0: 
                     all_faces.append(np.array(faces.copy()))
