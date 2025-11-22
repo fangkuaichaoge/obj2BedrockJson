@@ -1,9 +1,52 @@
 # Setup
 import os
+import numpy as np
 from objProcesser import *
 from rectFc import *
 from toBedrock import *
 from shader import *
+from mathHelper import *
+
+# 辅助函数
+def getFileName(file_path):
+    """从文件路径中提取文件名（不含扩展名）"""
+    return os.path.splitext(os.path.basename(file_path))[0]
+
+# 用户输入和配置变量
+print('===== OBJ到Bedrock JSON转换器 =====')
+print('注意：本程序只支持三角形面的OBJ文件，请确保您的模型已转换为三角形面格式。')
+
+# 默认OBJ文件路径
+default_obj_path = os.path.join(os.getcwd(), 'obj', 'tst.obj')
+# 获取用户输入，使用默认路径作为提示
+user_input = input(f'请输入OBJ文件路径 ')
+# 如果用户输入为空，则使用默认路径
+file_path = user_input.strip() if user_input.strip() else default_obj_path
+print(f'已设置OBJ文件路径为: {file_path}')
+
+# 其他配置变量
+save_path = 'json'  # 保存JSON的默认路径
+save_name = ''  # 默认为空，将使用文件名
+model_rotation = np.eye(3)  # 默认不旋转
+BBL_per_unit = 16  # 每个单位的方块数量
+coincident_tol = 1e-3  # 重合点容差
+vis_sample_pts = 100  # 可见性采样点数
+fast_intersect = True  # 是否使用快速相交检测
+hardcore_hole_test = False  # 是否使用严格的孔洞测试
+min_edge_length = 0.01  # 最小边长度
+trace_limit = 1000  # 跟踪限制
+perpendicular_range = 0.1  # 垂直范围
+auto_coloring = False  # 是否自动着色
+uv_file_name = ''  # UV文件名
+base_colors = []  # 基础颜色
+default_base_color = [0.5, 0.5, 0.5]  # 默认基础颜色
+min_colors = []  # 最小颜色
+default_min_color = [0.2, 0.2, 0.2]  # 默认最小颜色
+texture_width = 1024  # 纹理宽度
+texture_amplifier = 1  # 纹理放大器
+texture_max_width = 32  # 最大纹理宽度
+uv_padding = 1  # UV填充
+light_source_angle = np.array([0, 1, 1])  # 光源角度
 
 # Dummy-proof config processing
 def unidealParamPrt(paramName, val, should_cn, should_en): # fck
