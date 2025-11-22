@@ -31,7 +31,7 @@ def load_obj(obj_path): # ck
     faces = []
     grps = []
     trigCt = 0
-    with open(obj_path, "r") as obj_file: 
+    with open(obj_path, "r", encoding='utf-8') as obj_file: 
         vertices = []
         for line in obj_file: 
             if line.startswith('g ') or line.startswith('s ') or line.startswith('mg ') or line.startswith('o '): 
